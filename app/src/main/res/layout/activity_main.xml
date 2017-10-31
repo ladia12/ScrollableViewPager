@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:text="Add"
             android:background="@color/green"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:textColor="@color/white"
             android:layout_marginRight="24dp"/>
 
@@ -37,6 +38,7 @@
             android:layout_height="wrap_content"
             android:text="Remove"
             android:layout_marginLeft="24dp"
+            android:foreground="?attr/selectableItemBackgroundBorderless"
             android:background="@color/flamingo_red"
             android:textColor="@color/white"/>
     </LinearLayout>

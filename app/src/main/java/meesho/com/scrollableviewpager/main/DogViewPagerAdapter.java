@@ -21,7 +21,7 @@ import meesho.com.scrollableviewpager.R;
 
 public class DogViewPagerAdapter extends PagerAdapter {
 
-    private int PAGE_COUNT = 0;
+    private int lastAdded = 0;
     private ArrayList<String> mData = new ArrayList<>();
     private ArrayList<String> mUrls = DogUrlProvider.getDogUrls();
     private int MAX_PAGE = mUrls.size();
@@ -34,16 +34,18 @@ public class DogViewPagerAdapter extends PagerAdapter {
 
 
     public void add() {
-        if(PAGE_COUNT < MAX_PAGE) {
-            mData.add(mUrls.get(PAGE_COUNT++));
+        if(lastAdded < MAX_PAGE) {
+            mData.add(0,mUrls.get(lastAdded));
+            lastAdded++;
             notifyDataSetChanged();
 
         }
     }
 
     public void remove() {
-        if(PAGE_COUNT > 0) {
-            mData.remove(mUrls.get(--PAGE_COUNT));
+        if(getCount() > 0) {
+            if(getCount() == 1) lastAdded = 0;
+            mData.remove(getCount() - 1);
             notifyDataSetChanged();
         }
     }
@@ -70,7 +72,7 @@ public class DogViewPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return PAGE_COUNT;
+        return mData.size();
     }
 
     @Override

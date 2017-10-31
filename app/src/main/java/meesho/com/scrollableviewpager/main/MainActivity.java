@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mAdapter = new DogViewPagerAdapter(this);
         mViewPager.setAdapter(mAdapter);
-        /*After setting the adapter use the timer */
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
 
@@ -61,7 +60,9 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.addButton) public void onAddButtonClicked(View view) {
 
         mAdapter.add();
-        mViewPager.setCurrentItem(mAdapter.getCount() -1, true);
+        mViewPager.setAdapter(null);
+        mViewPager.setAdapter(mAdapter);
+        mViewPager.setCurrentItem(0, true);
     }
 
     @OnClick(R.id.removeButton) public void onRemoveButtonClicked(View view) {
