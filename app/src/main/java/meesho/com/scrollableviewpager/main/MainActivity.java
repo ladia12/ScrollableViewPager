@@ -33,6 +33,11 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mAdapter = new DogViewPagerAdapter(this);
         mViewPager.setAdapter(mAdapter);
+        setScollViewPager();
+
+    }
+
+    private void setScollViewPager() {
         final Handler handler = new Handler();
         final Runnable Update = new Runnable() {
 
@@ -46,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
         };
-
         new Timer().schedule(new TimerTask() { // task to be scheduled
 
             @Override
@@ -54,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(Update);
             }
         }, DELAY_MS, PERIOD_MS);
-
     }
 
     @OnClick(R.id.addButton) public void onAddButtonClicked(View view) {

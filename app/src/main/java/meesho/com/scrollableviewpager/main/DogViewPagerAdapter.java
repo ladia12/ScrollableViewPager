@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -58,12 +59,25 @@ public class DogViewPagerAdapter extends PagerAdapter {
 
         ImageView imageView = itemView.findViewById(R.id.image);
         TextView textView = itemView.findViewById(R.id.index);
+        final View progress = itemView.findViewById(R.id.progress);
 
         DisplayMetrics displayMetrics = new DisplayMetrics();
         activity.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         int width = displayMetrics.widthPixels;
+        progress.setVisibility(View.VISIBLE);
 
-        Picasso.with(activity).load(mData.get(position)).resize(width,0).into(imageView);
+        Picasso.with(activity).load(mData.get(position)).resize(width,0)
+                .into(imageView, new Callback() {
+                    @Override
+                    public void onSuccess() {
+                        progress.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onError() {
+                        progress.setVisibility(View.GONE);
+                    }
+                });
         textView.setText("Index: " + position);
 
         container.addView(itemView);
